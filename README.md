@@ -260,6 +260,75 @@ Sat Jul 22 06:21:21 2017
 |    0     26340    C   ./darknet                                     5631MiB |
 +-----------------------------------------------------------------------------+
 
+===============================================================================
+GENERAL INFORMATION
+===============================================================================
+
+Our traffic pattern collection is modelled with darknet framework running CNN(YOLO) for detection and our object tracking methodology. \
+
+Support for object tracking (we currently use MEDIAN_FLOW, and optical flow) \
+Edge computing support - fasten up real-time data consumption, say for a camera feed using a multi-algorithmic approach \
+Read our paper "Real-time traffic pattern collection and analysis model (TPCAM)" for more information \
+Further info: unnikrishnankgs@gmail.com \
+
+PLATFORMS: \
+Ubuntu; Tested on TX2 and an NVIDIA 1080 GTX enabled PC.
+
+General Pre-req: \
+
+CUDA
+CUDNN
+OpenCV [Mandatory]
 
 
+===============================================================================
+BUILD INSTRUCTIONS
+===============================================================================
+
+Object Tracker: \
+first build the sjtracker: Pre-requisite: OpenCV and OpenCV_contrib. Follow: http://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html to install both of them. [We don't need python for now]. \
+
+$cd objtracker/ \
+$./build.sh \
+
+Darknet (Supporting tracker!!): \
+
+$cd darknet_track/ \
+$make
+
+OR (build both together using a single script):\
+
+$cd darknet_track/
+$./BUILDME.sh
+
+===============================================================================
+AUXILIARY INFORMATION
+===============================================================================
+
+MORE: Please see: src/demo.c for implementation Use MACRO: DISPLAY_RESULTS if you want to see it in action.
+(By default this is enabled) \
+
+Read: include/darknet_exp.h for the interface. \
+Call darknet using run_detector_model() function. The data structures should be self-explanatory [We shall add documentation soon..] \
+
+===============================================================================
+RUN INSTRUCTIONS
+===============================================================================
+
+Download weights: \
+https://drive.google.com/open?id=0B-XC86pihjhabFpkdEx5cjhPMUU \
+ 
+Example (Please supply a 480p video - the lane information is scaled for 480p): \
+source exports.sh \
+./darknet detector demo cfg/aic.data cfg/yolo-aic.cfg yolo-aic_final.weights 1080p_WALSH_ST_000.mp4 > out.txt \
+
+If you'd like to supply another video resolution: \
+edit src/demo.c line 997, 998 \
+
+After the complete video is analysed, traffic patter is dumped in:
+data/team1_darknet/$VIDEO_FILE_NAME$/traffic_pattern_timestamp".
+- this is a text file in JSON format.
+
+unable to load libraries? 
+Dynamic library paths if not in the system defined paths shall be set via LD_LIBRARY_PATH on linux systems (DYLD_LIBRARY_PATH in OS X) See: darknet_track/exports.sh; no need to edit for linux; Just do: $cd darknet_track $source exports.sh
 

@@ -295,16 +295,6 @@ $cd darknet_track/
 $./BUILDME.sh
 
 ===============================================================================
-AUXILIARY INFORMATION
-===============================================================================
-
-MORE: Please see: src/demo.c for implementation Use MACRO: DISPLAY_RESULTS if you want to see it in action.
-(By default this is enabled) 
-
-Read: include/darknet_exp.h for the interface. 
-Call darknet using run_detector_model() function. The data structures should be self-explanatory [We shall add documentation soon..] 
-
-===============================================================================
 RUN INSTRUCTIONS
 ===============================================================================
 
@@ -324,4 +314,15 @@ data/team1_darknet/$VIDEO_FILE_NAME$/traffic_pattern_timestamp".
 
 unable to load libraries? 
 Dynamic library paths if not in the system defined paths shall be set via LD_LIBRARY_PATH on linux systems (DYLD_LIBRARY_PATH in OS X) See: darknet_track/exports.sh; no need to edit for linux; Just do: $cd darknet_track $source exports.sh
+
+===============================================================================
+AUXILIARY INFORMATION
+===============================================================================
+
+MORE: Please see: src/demo.c for implementation Use MACRO: DISPLAY_RESULTS if you want to see it in action.
+(By default this is enabled) 
+
+Read: include/darknet_exp.h for the interface. 
+Call darknet using run_detector_model() function. The data structures should be self-explanatory [We shall add documentation soon..] 
+
 
